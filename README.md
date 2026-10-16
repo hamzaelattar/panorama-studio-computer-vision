@@ -8,6 +8,63 @@ Application Streamlit pédagogique et fonctionnelle de création de panoramas. E
 
 L'interface expose les points d'intérêt, les descripteurs, le KNN matching, le test du ratio de Lowe, les inliers RANSAC, les homographies, la fusion et les métriques comparatives.
 
+## L'environnement Conda `OPENCV`
+
+Un environnement Conda est un espace Python isolé. Il possède son propre interpréteur et ses propres bibliothèques, ce qui évite que les dépendances de Panorama Studio entrent en conflit avec celles d'autres projets.
+
+L'environnement utilisé par ce projet existe déjà à cet emplacement :
+
+```text
+F:\anaconda\envs\OPENCV
+```
+
+La commande suivante l'active dans le terminal courant :
+
+```powershell
+conda activate OPENCV
+```
+
+Après l'activation, les commandes `python` et `python -m pip` ciblent normalement `F:\anaconda\envs\OPENCV\python.exe`. Le nom `(OPENCV)` apparaît généralement au début de l'invite PowerShell. Cette activation doit être répétée dans chaque nouveau terminal.
+
+### Contenu principal vérifié
+
+| Composant | Version installée | Utilisation dans le projet |
+|---|---:|---|
+| Python | 3.9.25 | Exécution de l'application et des tests |
+| opencv-contrib-python | 4.10.0.84 | SIFT, FAST, BRIEF, ORB, matching, RANSAC et transformations |
+| NumPy | 2.0.2 | Tableaux d'images et calcul matriciel |
+| Streamlit | 1.50.0 | Interface web interactive |
+| Pandas | 2.3.3 | Tableau comparatif des algorithmes |
+| Pillow | 11.3.0 | Prise en charge complémentaire des images |
+| pytest | 8.4.2 | Exécution des tests automatiques |
+
+`opencv-contrib-python` fournit à la fois les fonctions OpenCV classiques et les modules supplémentaires. Les trois composants nécessaires ont été vérifiés dans cet environnement :
+
+- `cv2.SIFT_create()` pour SIFT ;
+- `cv2.FastFeatureDetector_create()` et `cv2.xfeatures2d.BriefDescriptorExtractor_create()` pour FAST + BRIEF ;
+- `cv2.ORB_create()` pour ORB.
+
+Streamlit installe également ses dépendances techniques, notamment Altair pour certains graphiques, PyArrow pour les échanges de données et Tornado pour le serveur web. Le fichier `requirements.txt` reste la référence pour les dépendances directes du projet.
+
+Pour confirmer que le terminal utilise le bon environnement :
+
+```powershell
+python -c "import sys; print(sys.executable)"
+python -m pip list
+```
+
+La première commande doit afficher :
+
+```text
+F:\anaconda\envs\OPENCV\python.exe
+```
+
+Pour quitter l'environnement à la fin du travail :
+
+```powershell
+conda deactivate
+```
+
 ## Installation avec l'environnement Conda existant
 
 Le projet cible l'environnement `OPENCV` et **ne crée aucun nouvel environnement**.
